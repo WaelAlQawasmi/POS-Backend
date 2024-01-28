@@ -29,6 +29,8 @@
 
 <script>
 import axios from 'axios';
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -38,6 +40,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setUser", "setToken"]),
     async  login() {
         try {
         const response = await axios.post('http://127.0.0.1:8089/api/auth/login', {
@@ -49,8 +52,8 @@ export default {
         });
 
         const token = response.data.token;
-        localStorage.setItem('token', token);
-        localStorage.setItem('token', token);
+        this.setUser(this.email);
+        this.setToken(token);
         this.$router.push('/home');
 
         //console.log(token);
