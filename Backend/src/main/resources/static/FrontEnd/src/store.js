@@ -16,6 +16,19 @@ export const store = createStore({
             state.token = token;
         },
     },
-    actions: {},
-    getters: {},
+    actions: {
+
+    },
+    getters: {
+        getUser: state => {
+            return state.user;
+        },
+        getToken: state => {
+            return state.token;
+        },
+        isAuthenticatedUser: state => {
+            console.log(state.user, state.token)
+            return state.user != null && state.token != null;
+        }
+    },
 });

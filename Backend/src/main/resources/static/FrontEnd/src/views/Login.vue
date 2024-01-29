@@ -29,7 +29,7 @@
 
 <script>
 import axios from 'axios';
-import { mapMutations } from "vuex";
+import { store } from '../store.js'
 
 export default {
   data() {
@@ -40,7 +40,6 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setUser", "setToken"]),
     async  login() {
         try {
         const response = await axios.post('http://127.0.0.1:8089/api/auth/login', {
@@ -50,10 +49,10 @@ export default {
         {
         withCredentials: true,
         });
-
+        store.commit('setUser', this.email)
         const token = response.data.token;
-        this.setUser(this.email);
-        this.setToken(token);
+        store.commit('setToken', token)
+
         this.$router.push('/home');
 
         //console.log(token);

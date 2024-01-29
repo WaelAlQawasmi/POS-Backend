@@ -26,13 +26,9 @@ const router = createRouter({
 export default router;
 
 router.beforeEach(async(to) => {
-    console.log(store);
-    console.log(to);
     const authRequired = to.meta.authRequired;
-    // const auth = useAuthStore();
-
-    if (authRequired /*&& !auth.user*/ ) {
-        // auth.returnUrl = to.fullPath;
-        //  return '/login';
+    if (!store.getters.isAuthenticatedUser && authRequired == true) {
+        alert(store.getters.getUser)
+        return '/login';
     }
 });
