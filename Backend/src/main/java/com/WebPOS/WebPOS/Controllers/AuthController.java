@@ -17,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.net.ssl.SSLEngineResult;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -34,6 +36,12 @@ public class AuthController {
 
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public SSLEngineResult.Status test() {
+        return SSLEngineResult.Status.OK;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)

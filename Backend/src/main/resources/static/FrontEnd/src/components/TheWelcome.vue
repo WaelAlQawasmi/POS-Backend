@@ -17,18 +17,24 @@ export default {
     
     ...mapMutations(["setUser", "setToken"]),
     async  getUserData() {
-      const headers = {
-       //s 'Authorization': `Bearer ${this.$store.getters.getToken}`,
-      };
+     
 
       try {
-        console.log( this.$store.getters.getToken);
+     //   console.log( this.$store.getters.getToken);
+     console.log("**********headersheadersheaders****************************");
+
+var headers=  {
+            "Content-type": "application/json",
+
+            'Authorization': "Bearer " + this.$store.getters.getToken,
+           };
+           console.log("**********headersheadersheaders****************************");
+           console.log(headers);
 
         const response = await axios.get('http://127.0.0.1:8089/api/main-page/userProfile', {
           withCredentials: true,
-          headers: {'Authorization':'Bearer ' + this.$store.getters.getToken }
+          headers:headers
         });
-
         // Handle the response
         console.log(response.data);
       } catch (error) {
