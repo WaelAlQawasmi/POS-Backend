@@ -4,10 +4,17 @@ import com.WebPOS.WebPOS.Services.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -17,6 +24,8 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebFluxSecurity
+@EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
     private userService userDetailsService;
@@ -31,20 +40,20 @@ public class SecurityConfig {
 
 
 
-//    @Bean
-//    public AuthenticationManager authManager() {
-//
-//        var authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(userDetailsService);
-//        authProvider.setPasswordEncoder(passwordEncoder());
-//        return new ProviderManager(authProvider);
-//    }
-//    @SuppressWarnings("deprecation")
-//    @Bean
-//    PasswordEncoder passwordEncoder() {
-//
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public AuthenticationManager authManager() {
+
+        var authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(authProvider);
+    }
+    @SuppressWarnings("deprecation")
+    @Bean
+    PasswordEncoder passwordEncoder() {
+
+        return new BCryptPasswordEncoder();
+    }
 //    @Bean
 //    public DaoAuthenticationProvider authenticationProvider() {
 //        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -107,7 +116,10 @@ System.out.println(http);
 
 
 
-
+    @Bean
+    public ConversionService conversionService() {
+        return new DefaultConversionService();
+    }
 
 
 }
