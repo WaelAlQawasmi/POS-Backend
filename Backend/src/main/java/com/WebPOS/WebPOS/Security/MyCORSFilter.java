@@ -1,5 +1,5 @@
 package com.WebPOS.WebPOS.Security;
-
+/*
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,3 +38,4 @@ public class MyCORSFilter implements Filter {
     }
 
 }
+*/
