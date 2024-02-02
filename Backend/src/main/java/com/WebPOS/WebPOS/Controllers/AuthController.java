@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.net.ssl.SSLEngineResult;
 
 @RestController
+//@CrossOrigin(origins = "http://127.0.0.1:5173"  , maxAge = 3600, allowedHeaders = "*")
+
 @RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
@@ -35,6 +37,7 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
 
     }
+   // @CrossOrigin(origins = "http://127.0.0.1:5173" , allowedHeaders = "*")
 
 
     @ResponseBody
